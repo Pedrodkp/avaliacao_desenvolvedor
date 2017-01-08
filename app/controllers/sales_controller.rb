@@ -62,10 +62,12 @@ class SalesController < ApplicationController
   end
 
   def import
-    if params[:file] != nil
+    if params[:file].present?   
       Sale.import(params[:file])
-      total_amount = Sale.where(source_file: params[:file].original_filename).sum("price * amount").to_s 
-      redirect_to sales_path, notice: "Sales Added Successfully, total value from the sales of the file: "+total_amount
+      total_amount = Sale.where(source_file: params[:file].original_filename).sum("price * amount")
+      redirect_to sales_path, notice: "Importado, valor total das vendas do arquivo: #{total_amount.round(2)}"
+    else
+      redirect_to sales_path, notice: "Nenhum arquivo selecionado."
     end
   end 
 

@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      sale: Vendas
+    attributes:
+      sale:
+        id: "Id" 
+        customer: "Comprador"
+        description: "Descrição"
+        price: "Preço Unitário"
+        amount: "Quantidade"
+        address: "Endereço"
+        furnisher: "Fornecedor"
+        created_at: "Criado em"
+        updated_at: "Atualizado em"
+        source_file: "Arquivo Origem"

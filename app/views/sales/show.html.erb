@@ -1,39 +1,24 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Sale -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Customer:</strong>
-  <%= @sale.customer %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:customer) %>:</strong></dt>
+  <dd><%= @sale.customer %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @sale.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
+  <dd><%= @sale.price %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:amount) %>:</strong></dt>
+  <dd><%= @sale.amount %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
+  <dd><%= @sale.address %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:furnisher) %>:</strong></dt>
+  <dd><%= @sale.furnisher %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:source_file) %>:</strong></dt>
+  <dd><%= @sale.source_file %></dd>
+</dl>
 
-<p>
-  <strong>Description:</strong>
-  <%= @sale.description %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @sale.price %>
-</p>
-
-<p>
-  <strong>Amount:</strong>
-  <%= @sale.amount %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @sale.address %>
-</p>
-
-<p>
-  <strong>Furnisher:</strong>
-  <%= @sale.furnisher %>
-</p>
-
-<p>
-  <strong>Source file:</strong>
-  <%= @sale.source_file %>
-</p>
-
-<%= link_to 'Edit', edit_sale_path(@sale) %> |
-<%= link_to 'Back', sales_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              sales_path, :class => 'btn btn-default'  %>

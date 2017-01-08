@@ -1,24 +1,43 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Sale -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
 
-<h1>Listing Sales</h1>
+<%= form_tag import_sales_path, multipart: true do %>
+  <div class='col-sm-12'>
+    <%= label :file, 'Importar arquivo:' %>
+  </div>
+  <div class='col-sm-5'>
+    <%= file_field_tag :file, :class => 'btn btn-default btn-xs' %>
+    </br>
+    <%= submit_tag "Importar", :class => 'btn btn-primary',
+                   :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } %>    
+  </div>
+  <div class="alert alert-info col-sm-7">
+    <strong>Importante:</strong>
+    </br>Dados serão atualizados pelo nome do arquivo.
+    </br>Números inválidos serão lidos como zero.
+  </div>
+</div>
+<% end %>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Customer</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Amount</th>
-      <th>Address</th>
-      <th>Furnisher</th>
-      <th>Source file</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:customer) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:price) %></th>
+      <th><%= model_class.human_attribute_name(:amount) %></th>
+      <th><%= model_class.human_attribute_name(:address) %></th>
+      <th><%= model_class.human_attribute_name(:furnisher) %></th>
+      <th><%= model_class.human_attribute_name(:source_file) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th>Ações</th>
     </tr>
   </thead>
-
   <tbody>
     <% @sales.each do |sale| %>
-      <tr>
+      <tr>        
         <td><%= sale.customer %></td>
         <td><%= sale.description %></td>
         <td><%= sale.price %></td>
@@ -26,20 +45,9 @@
         <td><%= sale.address %></td>
         <td><%= sale.furnisher %></td>
         <td><%= sale.source_file %></td>
-        <td><%= link_to 'Show', sale %></td>
-        <td><%= link_to 'Edit', edit_sale_path(sale) %></td>
-        <td><%= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= sale.created_at.strftime("%d/%m/%Y") %></td>
+        <td><%= link_to 'Ver',sale_path(sale), :class => 'btn btn-default btn-xs' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<h3>Import Sales</h3>
-<%= form_tag import_sales_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Upload Sales" %>
-<% end %>  
-
-<%= link_to 'New Sale', new_sale_path %>
