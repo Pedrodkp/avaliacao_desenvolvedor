@@ -8,7 +8,7 @@ class Sale < ActiveRecord::Base
     # Marty McFly R$20 Sneakers for R$5 5.0 1 123 Fake St Sneaker Store Emporium
     # Snake Plissken  R$20 Sneakers for R$5 5,2 4 123 Fake St Sneaker Store Emporium
 
-    if file != nil
+    if file.present?
       Sale.where(source_file: file.original_filename).destroy_all
 
       CSV.foreach(file.path, headers: true, :col_sep => "\t") do |row|      
@@ -20,6 +20,8 @@ class Sale < ActiveRecord::Base
                      furnisher: row[5],
                      source_file: file.original_filename)
       end
+
+      true
     end
   end
 end
