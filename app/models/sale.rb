@@ -18,10 +18,8 @@ class Sale < ActiveRecord::Base
                      amount: row[3],
                      address: row[4],
                      furnisher: row[5],
-                     source_file: file.original_filename)
+                     source_file: file.original_filename)        
       end
-
-      true
     end
   end
 end

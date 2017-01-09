@@ -46,4 +46,20 @@ class SalesControllerTest < ActionController::TestCase
 
     assert_redirected_to sales_path
   end
+
+  test "should import sales from files" do
+    file = "exemplo.txt"
+    CSV.open(file, "wb", headers: true, :col_sep => "\t") do |csv|
+      csv << ["Comprador", "descrição", "Preço Unitário", "Quantidade", "Endereço", "Fornecedor"]
+      csv << ["Xuxa", "R$10 off R$20 of food", "10.0", "2", "987 Fake St", "Bobs Pizza"]
+      csv << ["Amy Pond", "R$30 of awesome for R$10", "10.0", "5", "456 Unreal Rd", "Toms Awesome Shop"]
+      csv << ["Marty McFly", "R$20 Sneakers for R$5", "5.0", "1", "123 Fake St", "Sneaker Store Emporium"]
+      csv << ["Snake Plissken", "R$20 Sneakers for R$5", "5,2", "4", "123 Fake St", "Sneaker Store Emporium"]
+    end
+    Sale.where(source_file: 'exemplo.txt').destroy_all
+    
+    post :import, :file => Rack::Test::UploadedFile.new(file, 'text/csv')
+    assert_redirected_to sales_path
+    assert_equal "Importado, valor total das vendas do arquivo: 95.0", flash[:notice]
+  end
 end
