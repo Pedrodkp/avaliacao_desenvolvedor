@@ -1,3 +1,27 @@
+# Resposta: Desafio de programação 1
+
+Acredito ter implementado o que foi solicitado, por favor envie seu feedback para: pedro.pereira@ecomex.com.br
+
+## Instruções de deploy
+
+Requisitos:
+
+ruby '2.1.10'
+rails' '4.2.7.1'
+bd 'sqlite3'
+
+Nenhuma instrução especial para deploy. Passos:
+1. Copie o projeto para ambiente Linux já tendo instalado o ruby '2.1.10' e rails' '4.2.7.1'.
+2. No diretório execute: bundle install, bundle update, rake db:create, rake db:migrate
+3. Inicie a aplicação executando: rails server
+4. Abra no browser o endereço: localhost:3000
+
+Nenhuma instrução especial para teste. Passos:
+1. Rode testes da aplicação executando: rake test
+
+
+
+
 # Desafio de programação 1
 A idéia deste desafio é nos permitir avaliar melhor as habilidades de candidatos à vagas de programador, de vários níveis.
 
